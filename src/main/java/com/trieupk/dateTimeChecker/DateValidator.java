@@ -43,7 +43,7 @@ public class DateValidator {
      * @return true if the date is valid
      */
     public boolean isValidDate(int day, int month, int year) {
-        if (!isValidRange(day, month, year)) {
+        if (isValidRange(day, month, year)) {
             return false;
         }
         try {
