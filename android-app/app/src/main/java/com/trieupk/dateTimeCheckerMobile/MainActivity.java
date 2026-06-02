@@ -36,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
                 
                 String result = dateValidator.getValidationMessage(day, month, year);
                 tvResult.setText(result);
+                tvResult.setVisibility(View.VISIBLE);
+                
+                if (result.contains("correct date time")) {
+                    tvResult.setTextColor(android.graphics.Color.parseColor("#4ADE80")); // success
+                } else {
+                    tvResult.setTextColor(android.graphics.Color.parseColor("#F87171")); // error
+                }
             }
         });
     }
