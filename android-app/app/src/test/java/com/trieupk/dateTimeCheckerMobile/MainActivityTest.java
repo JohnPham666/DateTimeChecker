@@ -10,15 +10,14 @@ import org.robolectric.annotation.Config;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
-@Config(sdk = 33)
+@Config(sdk = 33, qualifiers = "w1080dp-h2400dp")
 public class MainActivityTest {
 
     @Rule
@@ -26,9 +25,9 @@ public class MainActivityTest {
 
     @Test
     public void testValidDate_Espresso() {
-        onView(withId(R.id.etDay)).perform(typeText("29"), closeSoftKeyboard());
-        onView(withId(R.id.etMonth)).perform(typeText("2"), closeSoftKeyboard());
-        onView(withId(R.id.etYear)).perform(typeText("2024"), closeSoftKeyboard());
+        onView(withId(R.id.etDay)).perform(replaceText("29"));
+        onView(withId(R.id.etMonth)).perform(replaceText("2"));
+        onView(withId(R.id.etYear)).perform(replaceText("2024"));
 
         onView(withId(R.id.btnCheck)).perform(click());
 
@@ -39,9 +38,9 @@ public class MainActivityTest {
 
     @Test
     public void testInvalidDate_Espresso() {
-        onView(withId(R.id.etDay)).perform(typeText("29"), closeSoftKeyboard());
-        onView(withId(R.id.etMonth)).perform(typeText("2"), closeSoftKeyboard());
-        onView(withId(R.id.etYear)).perform(typeText("2023"), closeSoftKeyboard());
+        onView(withId(R.id.etDay)).perform(replaceText("29"));
+        onView(withId(R.id.etMonth)).perform(replaceText("2"));
+        onView(withId(R.id.etYear)).perform(replaceText("2023"));
 
         onView(withId(R.id.btnCheck)).perform(click());
 
