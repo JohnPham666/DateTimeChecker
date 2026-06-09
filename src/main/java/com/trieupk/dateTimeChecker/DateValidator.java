@@ -55,6 +55,28 @@ public class DateValidator {
     }
 
     /**
+     * Returns the number of days in the given month and year.
+     * Returns 0 if the month or year is invalid or out of range.
+     *
+     * @param month the month value
+     * @param year  the year value
+     * @return the number of days, or 0 if invalid
+     */
+    public int daysInMonth(Integer month, Integer year) {
+        if (month == null || year == null) {
+            return 0;
+        }
+        if (month < MIN_MONTH || month > MAX_MONTH || year < MIN_YEAR || year > MAX_YEAR) {
+            return 0;
+        }
+        try {
+            return java.time.YearMonth.of(year, month).lengthOfMonth();
+        } catch (DateTimeException e) {
+            return 0;
+        }
+    }
+
+    /**
      * Parses string inputs and returns a user-friendly validation message.
      *
      * @param dayStr   the day as a string

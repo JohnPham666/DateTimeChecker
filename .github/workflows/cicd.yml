@@ -105,5 +105,13 @@ jobs:
       working-directory: ./e2e-tests
       run: npx playwright test
 
+    - name: Upload Playwright Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report
+        path: ./e2e-tests/playwright-report/
+        retention-days: 7
+
     - name: Run Performance Test (k6)
       run: k6 run performance_test.js
