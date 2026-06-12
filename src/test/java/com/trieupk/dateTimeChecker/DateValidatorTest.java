@@ -59,9 +59,9 @@ class DateValidatorTest {
     }
 
     @Test
-    @DisplayName("CheckDate 6 (Gen N): 15/6/2020 - Normal (Mid 30-day month)")
-    void testCheckDate_15_6_2020() {
-        assertTrue(validator.isValidDate(15, 6, 2020));
+    @DisplayName("CheckDate 6 (Gen N): 15/8/2020 - Normal (Mid 30-day month)")
+    void testCheckDate_15_8_2020() {
+        assertTrue(validator.isValidDate(15, 8, 2020));
     }
 
     @Test

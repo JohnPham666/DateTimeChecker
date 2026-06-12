@@ -1,81 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Date Time Checker — Validate any date in the Gregorian calendar. Enter day, month, and year to check if it's a valid date.">
+    <meta name="description"
+        content="Date Time Checker — Validate any date in the Gregorian calendar. Enter day, month, and year to check if it's a valid date.">
     <title>Date Time Checker</title>
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
+
 <body>
 
-<div class="card">
-    <!-- Header -->
-    <div class="header">
-        <span class="header__icon">📅</span>
-        <h1 class="header__title">Date Time Checker V2</h1>
-        <p class="header__subtitle">Validate any date in the Gregorian calendar</p>
+    <div class="card">
+        <!-- Header -->
+        <div class="header">
+            <span class="header__icon">📅</span>
+            <h1 class="header__title">Date Time Checker</h1>
+            <p class="header__subtitle">Validate any date in the Gregorian calendar</p>
+        </div>
+
+        <!-- Date Input Form -->
+        <form class="form" th:action="@{/check}" method="post" id="dateForm">
+            <div class="form__group">
+                <label class="form__label" for="dayInput">Day</label>
+                <input class="form__input" type="text" id="dayInput" name="day" placeholder="1 – 31" th:value="${day}"
+                    autocomplete="off" required>
+            </div>
+
+            <div class="form__group">
+                <label class="form__label" for="monthInput">Month</label>
+                <input class="form__input" type="text" id="monthInput" name="month" placeholder="1 – 12"
+                    th:value="${month}" autocomplete="off" required>
+            </div>
+
+            <div class="form__group">
+                <label class="form__label" for="yearInput">Year</label>
+                <input class="form__input" type="text" id="yearInput" name="year" placeholder="1000 – 3000"
+                    th:value="${year}" autocomplete="off" required>
+            </div>
+
+            <div class="form__buttons">
+                <button type="submit" class="btn btn--primary" id="checkBtn">Check</button>
+                <a th:href="@{/}" class="btn btn--secondary" id="clearBtn"
+                    style="text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                    Clear
+                </a>
+            </div>
+        </form>
+
+        <!-- Result Message -->
+        <div th:if="${result}" class="result" th:classappend="${isValid} ? 'result--success' : 'result--error'"
+            id="resultMessage">
+            <span th:text="${result}"></span>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Date Time Checker &bull; Spring Boot + Thymeleaf
+        </div>
     </div>
-
-    <!-- Date Input Form -->
-    <form class="form" th:action="@{/check}" method="post" id="dateForm">
-        <div class="form__group">
-            <label class="form__label" for="dayInput">Day</label>
-            <input class="form__input"
-                   type="text"
-                   id="dayInput"
-                   name="day"
-                   placeholder="1 – 31"
-                   th:value="${day}"
-                   autocomplete="off"
-                   required>
-        </div>
-
-        <div class="form__group">
-            <label class="form__label" for="monthInput">Month</label>
-            <input class="form__input"
-                   type="text"
-                   id="monthInput"
-                   name="month"
-                   placeholder="1 – 12"
-                   th:value="${month}"
-                   autocomplete="off"
-                   required>
-        </div>
-
-        <div class="form__group">
-            <label class="form__label" for="yearInput">Year</label>
-            <input class="form__input"
-                   type="text"
-                   id="yearInput"
-                   name="year"
-                   placeholder="1000 – 3000"
-                   th:value="${year}"
-                   autocomplete="off"
-                   required>
-        </div>
-
-        <div class="form__buttons">
-            <button type="submit" class="btn btn--primary" id="checkBtn">Check</button>
-            <a th:href="@{/}" class="btn btn--secondary" id="clearBtn"
-               style="text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
-                Clear
-            </a>
-        </div>
-    </form>
-
-    <!-- Result Message -->
-    <div th:if="${result}" class="result"
-         th:classappend="${isValid} ? 'result--success' : 'result--error'"
-         id="resultMessage">
-        <span th:text="${result}"></span>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        Date Time Checker &bull; Spring Boot + Thymeleaf
-    </div>
-</div>
 
 </body>
+
 </html>
