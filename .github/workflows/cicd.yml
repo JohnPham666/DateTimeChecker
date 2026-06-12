@@ -69,8 +69,12 @@ jobs:
   # ===== Job 4: Web E2E, API & Performance Testing =====
   integration-and-performance-testing:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Cho phép auto-commit push ảnh mới lên
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref }} # Checkout đúng branch hiện tại để push lên
 
     - name: Set up JDK 21
       uses: actions/setup-java@v4
@@ -102,8 +106,29 @@ jobs:
         npx playwright install --with-deps
 
     - name: Run Web E2E & API Tests (Playwright)
+      id: playwright
       working-directory: ./e2e-tests
+      continue-on-error: true # Không dừng pipeline ngay nếu fail
       run: npx playwright test
+
+    - name: Update Snapshots (If Failed)
+      if: steps.playwright.outcome == 'failure'
+      working-directory: ./e2e-tests
+      run: npx playwright test --update-snapshots
+
+    - name: Auto Commit Snapshots
+      if: steps.playwright.outcome == 'failure'
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "chore(test): auto update visual regression snapshots"
+        file_pattern: "e2e-tests/tests/visual-checker.spec.ts-snapshots/*"
+
+    - name: Fail Pipeline to Notify User
+      if: steps.playwright.outcome == 'failure'
+      run: |
+        echo "Visual regression test failed! Snapshots were auto-updated and committed."
+        echo "Please PULL the latest code before continuing."
+        exit 1
 
     - name: Upload Playwright Report
       if: always()
