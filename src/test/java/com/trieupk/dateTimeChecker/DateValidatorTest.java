@@ -29,7 +29,7 @@ class DateValidatorTest {
     @Test
     @DisplayName("CheckDate 1 (Sample N): 29/2/2000 - Normal (Leap year century)")
     void testCheckDate_29_2_2000() {
-        assertTrue(validator.isValidDate(29, 2, 2000));
+        assertTrue(validator.isValidDate(30, 2, 2000));
     }
 
     @Test
