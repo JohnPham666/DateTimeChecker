@@ -158,7 +158,7 @@ on:
 
 ---
 
-## Phần 3: Kết luận (Wrap up)
+## Phần 3: Kết luận (Wrap up
 
 Từ giờ, vòng đời phát triển phần mềm của team chúng ta là:
 1. Bạn thay đổi code (VD: Fix một bug của ngày 31/12).
