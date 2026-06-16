@@ -18,10 +18,8 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-
     - name: Build and Test with Maven
       run: mvn clean test
-
   # ===== Job 2: Build & Push Docker Image =====
   docker-build-and-push:
     runs-on: ubuntu-latest
